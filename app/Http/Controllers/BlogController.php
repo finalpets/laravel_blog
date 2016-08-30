@@ -16,8 +16,13 @@ class BlogController extends Controller
     	//first means get the first object 
 
     	//return the view and pass in the post object
-    	return view('blog.single')->withPost($post);
+    	return view('blog.single')->with('post',$post);
+    }
 
+    public function getIndex() {
+    	$posts = Post::paginate(10);
+
+    	return view('blog.index')->withPosts($posts);
 
     }
 }

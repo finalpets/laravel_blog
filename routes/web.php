@@ -18,6 +18,8 @@ Route::get('blog/{slug}',['as' => 'blog.single' , 'uses' => 'BlogController@getS
 //w means any letter
 //d means any number
 
+Route::get('blog', ['uses' => 'BlogController@getIndex' , 'as' => 'blog.index']);
+
 Route::get('/', 'PagesController@getIndex');
 Route::get('about','PagesController@getAbout');
 Route::get('contact', 'PagesController@getContact');
