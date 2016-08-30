@@ -13,6 +13,18 @@
 //slug name of the parameter
 //closure means go no where in the php artisan route:list 
 //uses means 
+
+//Authentication Routes
+Route::get('auth/login', 'Auth\LoginController@getLogin');
+Route::post('auth/login', 'Auth\LoginController@postLogin');
+Route::get('auth/logout', 'Auth\LoginController@getLogout');
+
+// Registration Routes
+
+Route::get('auth/register', 'Auth\RegisterController@getRegister');
+Route::post('auth/register', 'Auth\RegisterController@getRegister');
+
+
 Route::get('blog/{slug}',['as' => 'blog.single' , 'uses' => 'BlogController@getSingle'])
 ->where('slug','[\w\d\-\_]+');
 //w means any letter
