@@ -37,4 +37,9 @@ Route::get('about','PagesController@getAbout');
 Route::get('contact', 'PagesController@getContact');
 
 Route::resource('posts','PostController');
+
+//Password Reset Routes
+Route::get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetForm');
+//Route::post('password/email', 'Auth\ResetPasswordController@sendResetLinkEmail');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
     
