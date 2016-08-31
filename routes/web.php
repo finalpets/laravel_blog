@@ -36,10 +36,15 @@ Route::get('/', 'PagesController@getIndex');
 Route::get('about','PagesController@getAbout');
 Route::get('contact', 'PagesController@getContact');
 
+// Posts CRUD
 Route::resource('posts','PostController');
 
 //Password Reset Routes
 Route::get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetForm');
 //Route::post('password/email', 'Auth\ResetPasswordController@sendResetLinkEmail');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+
+// Categories CRUD(Resource) removing create function
+Route::resource('categories','CategoryController',['except'=> ['create']]);
     
