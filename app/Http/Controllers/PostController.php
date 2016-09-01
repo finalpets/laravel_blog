@@ -12,6 +12,8 @@ use App\Category;
 
 use Session;
 
+use App\Tag;
+
 class PostController extends Controller
 {
 
@@ -41,7 +43,8 @@ class PostController extends Controller
     {
         //
         $categories = Category::all();
-        return view('posts.create')->with('categories',$categories);
+        $tags = Tag::all();
+        return view('posts.create')->with('categories',$categories)->with('tags',$tags);
     }
 
     /**
@@ -52,7 +55,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // 
+        //dd($request); //this is for debugging the information  and stops here nothing below will call
+        // validate data
         $this->validate($request , array(
             'title' => 'required|max:255',
             'body' => 'required' ,
@@ -68,6 +72,8 @@ class PostController extends Controller
 
 
         $post->save();
+
+        $post->tags()->sync($request->tags,false);
 
         Session::flash('success','The blog post was succesfully save!');
 
@@ -104,7 +110,8 @@ class PostController extends Controller
         // foreach ($categories as $category) {
         //     $cats[$category->id] = $category->name;
         // }
-        return view('posts.edit')->with('post', $post)->with('categories',$categories);
+        $tags = Tag::pluck('name','id');
+        return view('posts.edit')->with('post', $post)->with('categories',$categories)->with('tags',$tags);
     }
 
     /**
@@ -145,6 +152,11 @@ class PostController extends Controller
         $post->body = $request->input('body');
 
         $post->save();
+        if(isset($request->tags)) {
+            $post->tags()->sync($request->tags,true);//true for update
+        } else {
+            $post->tags()->sync(array());
+        }
         // set flash data with success message
         Session::flash('success','This post was Successfully saved.');
 
