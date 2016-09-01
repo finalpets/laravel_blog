@@ -47,4 +47,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // Categories CRUD(Resource) removing create function
 Route::resource('categories','CategoryController',['except'=> ['create']]);
+
+//Tags CRUD
+
+Route::resource('tags','TagController',['except' => 'create']);
     
