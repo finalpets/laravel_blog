@@ -53,4 +53,9 @@ Route::resource('categories','CategoryController',['except'=> ['create']]);
 //Tags CRUD
 
 Route::resource('tags','TagController',['except' => 'create']);
+
+//Commets CRUD
+Route::post('comments/{post_id}',['uses' => 'CommentsController@store','as' => 'comments.store']);
+
+
     
