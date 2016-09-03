@@ -6,6 +6,18 @@
 @section('stylesheet')
 	<link href="{{ asset('css/parsley.css') }}" rel="stylesheet">
 	{{ Html::style('css/select2.min.css') }}
+
+	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
+	<script>
+		tinymce.init({
+			selector: 'textarea',
+			plugins: 'link code',
+			menubar: false
+
+		});
+		
+	</script>
 @endsection
 
 @section('content')
@@ -36,7 +48,7 @@
 				</select>
 
 				<label name="body">Post Body:</label>
-				<textarea name="body" class="form-control" required="" ></textarea>
+				<textarea name="body" class="form-control" ></textarea>
 
 				<button type="submit" class="btn btn-success btn-lg btn-block" style="margin-top: 20px">Create Post</button>
 				<input type="hidden" name="_token" value="{{ Session::token() }}">

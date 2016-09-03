@@ -52,7 +52,7 @@ class PagesController extends Controller{
 
 	Session::flash('success','Your Email was Sent');
 
-	return redirect()->url('/');
+	return redirect('/');
 
 
 
