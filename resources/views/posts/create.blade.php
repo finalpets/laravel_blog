@@ -25,8 +25,8 @@
 		<div class="col-md-8 col-md-offset-2">
 		<h1>Create New Post</h1>
 		<hr>
-		<form id="form" action="{{  route('posts.store') }}" method="post">
-			
+		 <!-- <form id="form" action="{{  route('posts.store') }}" method="post" enctype="multipart/form-data"> -->
+		{!! Form::open(array('route' => 'posts.store','data-parsley-validate' => '' , 'files' => true)) !!}	
 				<label name="title">Title:</label>
 				<input type="text" class="form-control" name="title" value="" required="" maxlength="255">
 
@@ -47,12 +47,16 @@
 					@endforeach
 				</select>
 
+				{{ Form::label('featured_image','Upload Featured Image:') }}
+				{{ Form::file('featured_image') }}
+
 				<label name="body">Post Body:</label>
 				<textarea name="body" class="form-control" ></textarea>
 
 				<button type="submit" class="btn btn-success btn-lg btn-block" style="margin-top: 20px">Create Post</button>
 				<input type="hidden" name="_token" value="{{ Session::token() }}">
-		</form>
+				{!! Form::close() !!}
+		<!-- </form> -->
 			
 		</div>
 	</div>

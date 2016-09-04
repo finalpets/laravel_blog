@@ -16,6 +16,8 @@ use App\Tag;
 
 use Purifier;
 
+use Image;
+
 class PostController extends Controller
 {
 
@@ -72,6 +74,17 @@ class PostController extends Controller
         $post->body = Purifier::clean($request->body);//clean malicius code
         $post->category_id = $request->category_id;
 
+        //save Image
+        if ($request->hasFile('featured_image')){
+            $image = $request->file('featured_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/'. $filename );
+
+            Image::make($image)->resize(800,400)->save($location);
+
+            $post->image = $filename;
+
+        }
 
         $post->save();
 
